@@ -1,38 +1,43 @@
-#include <stdbool.h>
 #include "sort.h"
 
 /**
- * bubble_sort - sort an array
- * @array: the array of integers
- * @size: size of the array
- * Return: nothing
+ * bubble_sort - Sorts an array of integers
+ * @array: The array to be sorted
+ * @size: Size of the array
+ * Return: Void
  */
+
 void bubble_sort(int *array, size_t size)
 {
 	size_t i, j;
-	int tmp;
-	i = 0;
-	bool swap = false;
-	
+	int temp_swap, flag = 0;
+
+	/*Check inputs*/
 	if (array == NULL || size == 0)
 	{
 		return;
 	}
 
-	do
+	/* Counts through the current step in the sort */
+	for (i = 0; i < size - 1; i++)
 	{
-		swap = false;
-		for (j = 0; j < (size - 1 - i); j++)
+		/* Loop through array */
+		for (j = 0; j < size - i - 1; j++)
 		{
 			if (array[j] > array[j + 1])
 			{
-				tmp = array[j];
+				/* Swap a[i] with a[1 + 1] */
+				temp_swap = array[j];
 				array[j] = array[j + 1];
-				array[j + 1] = tmp;
-				swap = true;
+				array[j + 1] = temp_swap;
+				/* Print result */
 				print_array(array, size);
+				flag = 1;
 			}
 		}
-		i++;
-	} while (swap);
+		if (flag == 0)
+		{
+			break;
+		}
+	}
 }
